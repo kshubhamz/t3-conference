@@ -10,13 +10,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techleap.conference.model.Session;
 import com.techleap.conference.service.SessionsService;
+
+// TODO : Create Session DTO
 
 @RestController
 @RequestMapping("/v1/sessions")
@@ -45,5 +49,15 @@ public class SessionsController {
 		sessionsService.deleteSessionBySessionId(id);
 		return Map.of("message", "Session deleted successfully with ID: " + id,
 				"timestamp", Instant.now());
+	}
+	
+	@PutMapping("{id}")
+	public Session updateSession(@PathVariable Long id, @RequestBody Session session) {
+		return sessionsService.updateSession(id, session);
+	}
+	
+	@PutMapping("{sessionId}/add-speaker")
+	public Session addSpeakerToSession(@PathVariable Long sessionId, @RequestParam Long speakerId) {
+		return sessionsService.addSpeakerToSession(sessionId, speakerId);
 	}
 }

@@ -13,4 +13,8 @@ public interface SessionsService {
 	Session saveSession(Session session);
 
 	void deleteSessionBySessionId(Long sessionId);
+	
+	Session updateSession(Long sessionId, Session updatedSession);
+	
+	Session addSpeakerToSession(Long sessionId, Long speakerId);
 }

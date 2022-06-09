@@ -1,0 +1,20 @@
+server:
+ port: 4000
+ servlet:
+  context-path: /api
+
+app:
+ version: 0.0.1
+
+spring:
+ profiles:
+  active: dev
+ jpa:
+  hibernate:
+   naming:
+    physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  properties:
+   hibernate:
+    jdbc:
+     lob:
+      non_contextual_creation: true # working with large object (lob) i.e. binary data (e.g - photo)
